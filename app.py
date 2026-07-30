@@ -25,7 +25,11 @@ balance = ingresos - gastos
 
 # Menú lateral
 
-st.sidebar.title("Menú")
+st.sidebar.title("💰 LiberFin")
+
+st.sidebar.write(
+    "Administra tus finanzas personales"
+)
 
 
 opcion = st.sidebar.selectbox(
