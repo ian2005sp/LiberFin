@@ -1,0 +1,6 @@
+fecha,tipo,categoria,etiqueta,descripcion,metodo_pago,monto
+2026-07-01,Ingreso,Trabajo,Salario,Primer pago del mes,Transferencia,15000
+2026-07-03,Gasto,Alimentacion,Comida,Supermercado,Tarjeta,1200
+2026-07-05,Gasto,Transporte,Movilidad,Gastos de gasolina,Efectivo,800
+2026-07-10,Gasto,Entretenimiento,Personal,Cine,Tarjeta,300
+2026-07-15,Gasto,Servicios,Mensual,Internet,Transferencia,500
