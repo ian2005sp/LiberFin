@@ -29,3 +29,13 @@ Muchas personas tienen dificultades para controlar sus gastos, identificar patro
 - GitHub: almacenamiento y control del proyecto.
 
 ## Estructura del proyecto
+LiberFin
+│
+├── app.py
+├── movimientos.csv
+├── requirements.txt
+└── README.md
+
+## Objetivo del proyecto
+
+Crear una herramienta sencilla e inteligente que permita a los usuarios comprender mejor sus finanzas personales y mejorar la toma de decisiones relacionadas con su dinero.
