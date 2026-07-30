@@ -32,8 +32,13 @@ opcion = st.sidebar.selectbox(
     "Selecciona una sección:",
     [
         "Inicio",
+        "Registrar movimiento",
         "Historial",
-        "Análisis"
+        "Análisis",
+        "Proyecciones",
+        "Recomendaciones",
+        "Simulador de compra",
+        "Gastos inusuales"
     ]
 )
 
@@ -86,5 +91,47 @@ elif opcion == "Análisis":
         .sum()
     )
 
+elif opcion == "Registrar movimiento":
 
+    st.header("Registrar movimiento")
+
+    st.write(
+        "Aquí agregaremos el formulario para registrar nuevos ingresos y gastos."
+    )
+
+
+elif opcion == "Proyecciones":
+
+    st.header("Proyecciones financieras")
+
+    st.write(
+        "Aquí podrás calcular metas de ahorro y objetivos financieros."
+    )
+
+
+elif opcion == "Recomendaciones":
+
+    st.header("Recomendaciones financieras")
+
+    st.write(
+        "Aquí LiberFin generará consejos personalizados."
+    )
+
+
+elif opcion == "Simulador de compra":
+
+    st.header("Simulador de compra inteligente")
+
+    st.write(
+        "Aquí podrás evaluar si una compra afecta tu presupuesto."
+    )
+
+
+elif opcion == "Gastos inusuales":
+
+    st.header("Detección de gastos inusuales")
+
+    st.write(
+        "Aquí analizaremos movimientos fuera de lo normal."
+    )
     st.bar_chart(gastos_categoria)
