@@ -207,10 +207,67 @@ elif opcion == "Proyecciones":
 
     st.header("Proyecciones financieras")
 
+
+    ingresos = datos[
+        datos["tipo"] == "Ingreso"
+    ]["monto"].sum()
+
+
+    gastos = datos[
+        datos["tipo"] == "Gasto"
+    ]["monto"].sum()
+
+
+    disponible = ingresos - gastos
+
+
     st.write(
-        "Aquí podrás calcular metas de ahorro y objetivos financieros."
+        f"Dinero disponible actual: ${disponible:,.2f}"
     )
 
+
+    meta = st.number_input(
+        "¿Cuál es el monto de tu meta financiera?",
+        min_value=0.0
+    )
+
+
+    ahorro_mensual = st.number_input(
+        "¿Cuánto puedes ahorrar al mes?",
+        min_value=0.0
+    )
+
+
+    if st.button("Calcular proyección"):
+
+
+        if ahorro_mensual == 0:
+
+            st.warning(
+                "El ahorro mensual debe ser mayor a cero."
+            )
+
+
+        else:
+
+            meses = meta / ahorro_mensual
+
+
+            st.success(
+                f"Alcanzarás tu meta aproximadamente "
+                f"en {meses:.1f} meses."
+            )
+
+
+            porcentaje = (
+                ahorro_mensual / ingresos
+            ) * 100
+
+
+            st.info(
+                f"Esto representa aproximadamente "
+                f"el {porcentaje:.1f}% de tus ingresos."
+            )
 
 elif opcion == "Recomendaciones":
 
