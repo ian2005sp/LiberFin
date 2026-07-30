@@ -74,10 +74,17 @@ if opcion == "Inicio":
 
 elif opcion == "Historial":
 
-    st.header("Historial de movimientos")
+    st.header("Historial financiero")
 
-    st.dataframe(datos)
 
+    datos_actualizados = pd.read_csv(
+        "movimientos.csv"
+    )
+
+
+    st.dataframe(
+        datos_actualizados
+    )
 
 # Análisis
 
