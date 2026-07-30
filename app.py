@@ -2,12 +2,6 @@ import streamlit as st
 import pandas as pd
 
 
-st.title("LiberFin")
-
-st.write(
-    "Gestor inteligente de gastos personales"
-)
-
 
 # Cargar datos
 
