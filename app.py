@@ -95,9 +95,79 @@ elif opcion == "Registrar movimiento":
 
     st.header("Registrar movimiento")
 
-    st.write(
-        "Aquí agregaremos el formulario para registrar nuevos ingresos y gastos."
+
+    fecha = st.date_input(
+        "Fecha"
     )
+
+
+    tipo = st.selectbox(
+        "Tipo de movimiento",
+        [
+            "Ingreso",
+            "Gasto"
+        ]
+    )
+
+
+    categoria = st.text_input(
+        "Categoría"
+    )
+
+
+    etiqueta = st.text_input(
+        "Etiqueta"
+    )
+
+
+    descripcion = st.text_input(
+        "Descripción"
+    )
+
+
+    metodo_pago = st.selectbox(
+        "Método de pago",
+        [
+            "Efectivo",
+            "Tarjeta",
+            "Transferencia"
+        ]
+    )
+
+
+    monto = st.number_input(
+        "Monto",
+        min_value=0.0
+    )
+
+
+    if st.button("Guardar movimiento"):
+
+
+        nuevo_movimiento = pd.DataFrame(
+            {
+                "fecha": [fecha],
+                "tipo": [tipo],
+                "categoria": [categoria],
+                "etiqueta": [etiqueta],
+                "descripcion": [descripcion],
+                "metodo_pago": [metodo_pago],
+                "monto": [monto]
+            }
+        )
+
+
+        nuevo_movimiento.to_csv(
+            "movimientos.csv",
+            mode="a",
+            header=False,
+            index=False
+        )
+
+
+        st.success(
+            "Movimiento guardado correctamente."
+        )
 
 
 elif opcion == "Proyecciones":
