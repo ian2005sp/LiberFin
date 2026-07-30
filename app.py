@@ -283,9 +283,75 @@ elif opcion == "Simulador de compra":
 
     st.header("Simulador de compra inteligente")
 
+
+    ingresos = datos[
+        datos["tipo"] == "Ingreso"
+    ]["monto"].sum()
+
+
+    gastos = datos[
+        datos["tipo"] == "Gasto"
+    ]["monto"].sum()
+
+
+    disponible = ingresos - gastos
+
+
     st.write(
-        "Aquí podrás evaluar si una compra afecta tu presupuesto."
+        f"Dinero disponible actualmente: ${disponible:,.2f}"
     )
+
+
+    producto = st.text_input(
+        "¿Qué producto deseas comprar?"
+    )
+
+
+    precio = st.number_input(
+        "Precio del producto",
+        min_value=0.0
+    )
+
+
+    if st.button("Evaluar compra"):
+
+
+        diferencia = precio - disponible
+
+
+        if diferencia <= 0:
+
+            restante = disponible - precio
+
+
+            st.success(
+                f"Puedes comprar {producto}. "
+                f"Después de la compra conservarías "
+                f"${restante:,.2f}."
+            )
+
+
+        else:
+
+            porcentaje = (
+                diferencia / precio
+            ) * 100
+
+
+            st.warning(
+                f"No es recomendable comprar {producto} todavía."
+            )
+
+
+            st.write(
+                f"Necesitas ahorrar ${diferencia:,.2f} adicionales."
+            )
+
+
+            st.write(
+                f"Esto representa aproximadamente "
+                f"el {porcentaje:.1f}% del valor del producto."
+            )
 
 
 elif opcion == "Gastos inusuales":
