@@ -358,7 +358,45 @@ elif opcion == "Gastos inusuales":
 
     st.header("Detección de gastos inusuales")
 
-    st.write(
-        "Aquí analizaremos movimientos fuera de lo normal."
-    )
+
+    gastos = datos[
+        datos["tipo"] == "Gasto"
+    ]
+
+
+    if gastos.empty:
+
+        st.write(
+            "No existen gastos registrados."
+        )
+
+
+    else:
+
+        promedio = gastos["monto"].mean()
+
+
+        gastos_inusuales = gastos[
+            gastos["monto"] > promedio * 2
+        ]
+
+
+        if gastos_inusuales.empty:
+
+            st.success(
+                "No se detectaron gastos fuera "
+                "del comportamiento normal."
+            )
+
+
+        else:
+
+            st.warning(
+                "Se encontraron gastos inusuales:"
+            )
+
+
+            st.dataframe(
+                gastos_inusuales
+            )
     st.bar_chart(gastos_categoria)
