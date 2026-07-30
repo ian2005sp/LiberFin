@@ -47,10 +47,30 @@ opcion = st.sidebar.selectbox(
 
 if opcion == "Inicio":
 
+    st.title("LiberFin")
+
+    st.subheader(
+        "Gestor inteligente de gastos personales"
+    )
+
+
+    st.write(
+        """
+        LiberFin es una aplicación diseñada para ayudar
+        a los usuarios a organizar sus finanzas personales,
+        analizar sus hábitos de consumo y tomar mejores
+        decisiones financieras.
+        """
+    )
+
+
+    st.divider()
+
+
     st.header("Resumen financiero")
 
-    col1, col2, col3 = st.columns(3)
 
+    col1, col2, col3 = st.columns(3)
 
     col1.metric(
         "Ingresos",
