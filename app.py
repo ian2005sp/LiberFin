@@ -399,4 +399,3 @@ elif opcion == "Gastos inusuales":
             st.dataframe(
                 gastos_inusuales
             )
-    st.bar_chart(gastos_categoria)
