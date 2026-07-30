@@ -216,9 +216,67 @@ elif opcion == "Recomendaciones":
 
     st.header("Recomendaciones financieras")
 
-    st.write(
-        "Aquí LiberFin generará consejos personalizados."
+
+    ingresos = datos[
+        datos["tipo"] == "Ingreso"
+    ]["monto"].sum()
+
+
+    gastos = datos[
+        datos["tipo"] == "Gasto"
+    ]["monto"].sum()
+
+
+    balance = ingresos - gastos
+
+
+    if balance > 0:
+
+        ahorro = balance * 0.20
+
+
+        st.success(
+            f"Tienes un balance positivo. "
+            f"Una recomendación es ahorrar aproximadamente "
+            f"${ahorro:,.2f}."
+        )
+
+
+    else:
+
+        st.warning(
+            "Tus gastos son mayores o iguales a tus ingresos. "
+            "Te recomendamos revisar tus categorías de consumo."
+        )
+
+
+    gastos_categoria = (
+        datos[datos["tipo"] == "Gasto"]
+        .groupby("categoria")["monto"]
+        .sum()
     )
+
+
+    if not gastos_categoria.empty:
+
+        categoria_mayor = gastos_categoria.idxmax()
+
+        gasto_mayor = gastos_categoria.max()
+
+
+        porcentaje = (
+            gasto_mayor / gastos
+        ) * 100
+
+
+        if porcentaje > 40:
+
+            st.info(
+                f"Tu categoría con mayor consumo es "
+                f"{categoria_mayor}, representando "
+                f"aproximadamente el {porcentaje:.1f}% "
+                "de tus gastos."
+            )
 
 
 elif opcion == "Simulador de compra":
