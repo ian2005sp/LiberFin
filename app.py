@@ -92,10 +92,36 @@ elif opcion == "Análisis":
 
     st.header("Análisis de gastos")
 
+
+    gastos = datos[
+        datos["tipo"] == "Gasto"
+    ]
+
+
     gastos_categoria = (
-        datos[datos["tipo"] == "Gasto"]
+        gastos
         .groupby("categoria")["monto"]
         .sum()
+    )
+
+
+    st.subheader(
+        "Distribución de gastos por categoría"
+    )
+
+
+    import plotly.express as px
+
+
+    grafica = px.pie(
+        values=gastos_categoria.values,
+        names=gastos_categoria.index,
+        title="Porcentaje de gastos"
+    )
+
+
+    st.plotly_chart(
+        grafica
     )
 
 elif opcion == "Registrar movimiento":
