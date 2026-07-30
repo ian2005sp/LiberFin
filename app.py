@@ -86,6 +86,105 @@ elif opcion == "Historial":
         datos_actualizados
     )
 
+
+    st.subheader(
+        "Resumen mensual"
+    )
+
+
+    mes = st.selectbox(
+        "Selecciona el mes:",
+        datos_actualizados["fecha"]
+        .str[:7]
+        .unique()
+    )
+
+
+    datos_mes = datos_actualizados[
+        datos_actualizados["fecha"]
+        .str.startswith(mes)
+    ]
+
+
+    ingresos_mes = datos_mes[
+        datos_mes["tipo"] == "Ingreso"
+    ]["monto"].sum()
+
+
+    gastos_mes = datos_mes[
+        datos_mes["tipo"] == "Gasto"
+    ]["monto"].sum()
+
+
+    balance_mes = ingresos_mes - gastos_mes
+
+
+    gastos_categoria = (
+        datos_mes[
+            datos_mes["tipo"] == "Gasto"
+        ]
+        .groupby("categoria")["monto"]
+        .sum()
+    )
+
+
+    if not gastos_categoria.empty:
+
+        categoria_mayor = gastos_categoria.idxmax()
+
+        monto_categoria = gastos_categoria.max()
+
+
+    else:
+
+        categoria_mayor = "ninguna"
+
+        monto_categoria = 0
+
+
+    if gastos_mes > 0:
+
+        promedio = datos_mes[
+            datos_mes["tipo"] == "Gasto"
+        ]["monto"].mean()
+
+
+        gastos_extra = datos_mes[
+            (datos_mes["tipo"] == "Gasto") &
+            (datos_mes["monto"] > promedio * 2)
+        ]
+
+
+    else:
+
+        gastos_extra = pd.DataFrame()
+
+
+    resumen = (
+        f"Durante el mes {mes}, "
+        f"tus ingresos fueron ${ingresos_mes:,.2f} "
+        f"y tus gastos fueron ${gastos_mes:,.2f}. "
+        f"Tu categoría con mayor gasto fue "
+        f"{categoria_mayor} con ${monto_categoria:,.2f}. "
+    )
+
+
+    if not gastos_extra.empty:
+
+        resumen += (
+            "Se detectaron gastos fuera de lo normal "
+            "que podrían requerir revisión."
+        )
+
+    else:
+
+        resumen += (
+            "No se detectaron gastos fuera de lo normal."
+        )
+
+
+    st.info(resumen)
+
 # Análisis
 
 elif opcion == "Análisis":
